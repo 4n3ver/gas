@@ -50,7 +50,7 @@ ReactDOM.render(
                 <Route path="resources" component={requireAuth(Dummy)}/>
             </Route>
         </Router>
-    </Provider>
-    , document.querySelector(".app")
+    </Provider>,
+    document.querySelector(".app")
 );
 

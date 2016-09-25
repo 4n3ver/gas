@@ -36,10 +36,13 @@ class RouteForm extends Component {
     }
 
     render() {
+        const formClass = `ui inverted${this.props.processing
+            ? " loading"
+            : ""} error form`;
         return (
             <div className="ui inverted segment">
                 <form onSubmit={this.props.handleSubmit(this._onSubmit)}
-                    className="ui inverted form error">
+                    className={formClass}>
                     <Field
                         component={FormInput}
                         name="origin"
@@ -65,7 +68,8 @@ class RouteForm extends Component {
 }
 
 const mapStateToProps = state => ({
-    errorMessage: state.route.error
+    errorMessage: state.route.error,
+    processing  : state.route.processing
 });
 
 const mapDispatchToProps = {

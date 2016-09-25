@@ -10,3 +10,5 @@ export const SET_ROUTE_ENDPOINT = "planorigin";
 export const ADD_WAYPOINT = "addwaypoint";
 export const REMOVE_WAYPOINT = "removewaypoint";
 export const ROUTE_ERROR = "route_error";
+export const START_PROCESSING_ROUTE = "start";
+export const DONE_PROCESSING_ROUTE = "done";

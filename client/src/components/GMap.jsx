@@ -2,7 +2,7 @@
 "use strict";
 
 import React, { Component } from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 class GMap extends Component {
     constructor(props) {
@@ -30,23 +30,22 @@ class GMap extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this._fetchRoute(nextProps.origin, nextProps.destination);
+        this._fetchRoute(nextProps.origin, nextProps.destination,
+                         nextProps.waypoints);
     }
 
     _bind(...methods) {
         methods.forEach((method) => this[method] = this[method].bind(this));
     }
 
-    _fetchRoute(origin, end) {
+    _fetchRoute(origin, end, waypoints) {
+        console.log(Object.keys(waypoints));
         this.directionsService.route(
             {
                 origin     : origin,
                 destination: end,
                 travelMode : "DRIVING",
-                //waypoints  : this.props.waypoints.map(
-                //    point => ({
-                //        location: `${point.location.lat},${point.location.lon}`
-                //    }))
+                waypoints  : Object.keys(waypoints).map(pt => ({location: pt}))
             },
             (response, status) => {
                 console.log(response, status);
@@ -60,17 +59,15 @@ class GMap extends Component {
     }
 
     render() {
-        // put the route for the first time
-        //this._fetchRoute(this.props.origin, this.props.end);
-
         // ref is to get direct reference to the actual DOM
         return <div id="map" ref="map"></div>;
     }
 }
 
 const mapStateToProps = state => ({
-    origin: state.route.origin,
-    destination: state.route.destination
+    origin     : state.route.origin,
+    destination: state.route.destination,
+    waypoints  : state.route.waypoints
 });
 
 const mapDispatchToProps = {};
