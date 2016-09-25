@@ -1,5 +1,9 @@
 #map {
-    height: 95%;
+    height: 98%;
+}
+
+div.ui.container {
+    margin-top: 10%;
 }
 
 div.app {

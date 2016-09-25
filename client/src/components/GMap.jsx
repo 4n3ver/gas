@@ -2,6 +2,7 @@
 "use strict";
 
 import React, { Component } from "react";
+import {connect} from "react-redux";
 
 class GMap extends Component {
     constructor(props) {
@@ -20,8 +21,8 @@ class GMap extends Component {
     componentDidMount() {
         this.map = new google.maps.Map(this.refs.map, {
             center: {
-                lat: this.props.origin.lat,
-                lng: this.props.origin.lon
+                lat: 41.99668,
+                lng: -87.87675
             },
             zoom  : 6
         });
@@ -29,13 +30,7 @@ class GMap extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        //this.map.panTo(
-        //    {
-        //        lat: nextProps.origin.lat,
-        //        lng: nextProps.origin.lon
-        //    }
-        //);
-        this._fetchRoute(nextProps.origin, nextProps.end);
+        this._fetchRoute(nextProps.origin, nextProps.destination);
     }
 
     _bind(...methods) {
@@ -43,17 +38,15 @@ class GMap extends Component {
     }
 
     _fetchRoute(origin, end) {
-        console.log(this.props.waypoints.map(
-            point => `${point.location.lat},${point.location.lon}`));
         this.directionsService.route(
             {
-                origin     : `${origin.lat},${origin.lon}`,
-                destination: `${end.lat},${end.lon}`,
+                origin     : origin,
+                destination: end,
                 travelMode : "DRIVING",
-                waypoints  : this.props.waypoints.map(
-                    point => ({
-                        location: `${point.location.lat},${point.location.lon}`
-                    }))
+                //waypoints  : this.props.waypoints.map(
+                //    point => ({
+                //        location: `${point.location.lat},${point.location.lon}`
+                //    }))
             },
             (response, status) => {
                 console.log(response, status);
@@ -68,11 +61,21 @@ class GMap extends Component {
 
     render() {
         // put the route for the first time
-        this._fetchRoute(this.props.origin, this.props.end);
+        //this._fetchRoute(this.props.origin, this.props.end);
 
         // ref is to get direct reference to the actual DOM
         return <div id="map" ref="map"></div>;
     }
 }
 
-export default GMap;
+const mapStateToProps = state => ({
+    origin: state.route.origin,
+    destination: state.route.destination
+});
+
+const mapDispatchToProps = {};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(GMap);
