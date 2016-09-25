@@ -11,10 +11,11 @@ import { API_URL } from "../config";
 
 export const planRoute = (origin, destination, vin, brand) => dispatch => {
     dispatch({type: START_PROCESSING_ROUTE});
-    fetch(`${API_URL}/gas?vin=${vin}&brand=${brand}`,
+    fetch(`${API_URL}/gas?origin=${origin}&destination=${destination}&vin=${vin}&brand=${brand}`,
           {method: "GET"})
         .then(resp => resp.json())
         .then(data => {
+            console.log(data);
             dispatch(
                 {
                     type   : SET_ROUTE_ENDPOINT,

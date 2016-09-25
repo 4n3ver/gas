@@ -6,8 +6,8 @@ div.ui.container {
     margin-top: 10%;
 }
 
-div.app {
-    height: 100%;
+body {
+    height: fit-content;
 }
 
 .ui.loading.form:before {

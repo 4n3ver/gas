@@ -48,9 +48,9 @@ class RouteForm extends Component {
                         <Field name="vin" component="select">
                             <option>Select Car Type</option>
                             <option value="2CNALPEC3B6000001">Chevy Equinox</option>
-                            <option value="1G6DH5E53C000000">Chevy Camaro</option>
-                            <option value="1G1PJ5SC9C700000">GMC Sierra</option>
-                            <option value="1GCRCSE09BZ00000">Chevy Suburban</option>
+                            <option value="1G6DH5E53C0000003">Chevy Camaro</option>
+                            <option value="1G1PJ5SC9C7000004">GMC Sierra</option>
+                            <option value="1GCRCSE09BZ000005">Chevy Suburban</option>
                             <option value="1G1ZE5E03CF000006">Chevy Malibu</option>
                             <option value="1G1JE6SH2C4000007">Chevy Yukon</option>
                         </Field>

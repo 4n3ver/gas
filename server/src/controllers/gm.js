@@ -3,9 +3,9 @@ import { API_GM_KEY as idpass } from "../config";
 
 export const VIN = {
     chevyEquinox : "2CNALPEC3B6000001",
-    chevyCamaro  : "1G6DH5E53C000000",
-    gmcSierra    : "1G1PJ5SC9C700000",
-    chevySuburban: "1GCRCSE09BZ00000",
+    chevyCamaro  : "1G6DH5E53C0000003",
+    gmcSierra    : "1G1PJ5SC9C7000004",
+    chevySuburban: "1GCRCSE09BZ000005",
     chevyMalibu  : "1G1ZE5E03CF000006",
     chevyYukon   : "1G1JE6SH2C4000007"
 };
@@ -72,12 +72,10 @@ export default function gm(vin, cb) {
                     body = JSON.parse(body);
                     if (body.commandResponse.status !== "inProgress") {
                         clearInterval(intID);
-                        cb(body);
+                        cb(body.commandResponse.body.diagnosticResponse);
                     }
                 });
             }, 4000);
-
         });
     });
 }
-

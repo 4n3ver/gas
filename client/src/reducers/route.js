@@ -22,8 +22,7 @@ export default (state = {}, action)=> {
             return Object.assign({}, state, {
                 origin     : action.payload.origin,
                 destination: action.payload.destination,
-                waypoints  : Object.assign({}, state.waypoints,
-                                           {[action.payload.gasStop]: null})
+                waypoints  : {[action.payload.gasStop]: null}
             });
         case ADD_WAYPOINT:
             return Object.assign({}, state, {
