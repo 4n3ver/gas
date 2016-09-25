@@ -7,7 +7,6 @@ class GMap extends Component {
     constructor(props) {
         super(props);
         this._bind("_fetchRoute");
-        this.state = {};    // put get initial state here instead
         this.directionsService = new google.maps.DirectionsService();
         this.directionsDisplay = new google.maps.DirectionsRenderer();
     }
@@ -68,8 +67,10 @@ class GMap extends Component {
     }
 
     render() {
-        // ref is to get direct reference to the actual DOM
+        // put the route for the first time
         this._fetchRoute(this.props.origin, this.props.end);
+
+        // ref is to get direct reference to the actual DOM
         return <div id="map" ref="map"></div>;
     }
 }
