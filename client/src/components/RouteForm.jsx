@@ -19,9 +19,9 @@ class RouteForm extends Component {
             method => this[method] = this[method].bind(this));
     }
 
-    _onSubmit({vin, origin, destination}) {
-        console.log(vin, origin, destination);
-        this.props.planRoute(origin, destination, vin);
+    _onSubmit({vin, brand, origin, destination}) {
+        console.log(vin, brand, origin, destination);
+        this.props.planRoute(origin, destination, vin, brand);
     }
 
     _renderAlert() {
@@ -53,6 +53,13 @@ class RouteForm extends Component {
                             <option value="1GCRCSE09BZ00000">Chevy Suburban</option>
                             <option value="1G1ZE5E03CF000006">Chevy Malibu</option>
                             <option value="1G1JE6SH2C4000007">Chevy Yukon</option>
+                        </Field>
+                    </div>
+                    <div className="field">
+                        <label>Gasoline Brand</label>
+                        <Field name="brand" component="select">
+                            <option value={undefined}>Any</option>
+                            <option value="Texaco">Texaco</option>
                         </Field>
                     </div>
                     <Field

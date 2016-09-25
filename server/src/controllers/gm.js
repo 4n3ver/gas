@@ -54,7 +54,7 @@ export default function gm(vin, cb) {
             if (error) {
                 throw new Error(error);
             }
-            console.log(body.commandResponse.url);
+            console.log(body);
             var diagnostic = {
                 method : "GET",
                 url    : body.commandResponse.url,

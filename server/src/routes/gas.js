@@ -2,14 +2,15 @@
 "use strict";
 
 import { Router } from "express";
-import gm  from "../controllers/gm";
+import gm from "../controllers/gm";
 
 const router = Router();
 
-router.get("/:vin", (req, resp) => {
+router.get("/", (req, resp) => {
     let origin = "41.99668,-87.87675";
     let destination = "41.81424,-86.69919";
-    gm(req.params.vin, x => console.log(JSON.stringify(x)));
+    console.log(req.query.vin, req.query.brand);
+    gm(req.query.vin, x => console.log(JSON.stringify(x)));
     setTimeout(() => resp.send({gasStop: destination}), 5000);
 });
 
