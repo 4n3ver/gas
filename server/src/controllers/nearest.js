@@ -26,7 +26,7 @@ function areaTriangle(a,b,c)
 {
 	var p = (a+b+c)/2;
 	var area = Math.sqrt(p*(p-a)*(p-b)*(p-c));
-
+	return area
 }
 
 function getDistToLine(lat1,lon1,lat2,lon2,lat3,lon3)
