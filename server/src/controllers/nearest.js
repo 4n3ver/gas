@@ -22,27 +22,24 @@ function distance(p1,p2) {
 	dist = dist * 60 * 1.1515
 	return dist
 }
+function areaTriangle(a,b,c)
+{
+	var p = (a+b+c)/2;
+	var area = Math.sqrt(p*(p-a)*(p-b)*(p-c));
+
+}
+
 function getDistToLine(lat1,lon1,lat2,lon2,lat3,lon3)
 {
+	var point1 = {"longitude":lon1 ,"latitude":lat1};
+	var point2 = {"longitude":lon2 ,"latitude":lat2};
+	var point3 = {"longitude":lon3 ,"latitude":lat3};
 
-	//getDistToLine(33.781577,-84.413087,33.781479,-84.391557,33.778244,-84.397790)
-	var y = Math.sin(lon3 - lon1) * Math.cos(lat3);
-	var x = Math.cos(lat1) * Math.sin(lat3) - Math.sin(lat1) * Math.cos(lat3) * Math.cos(lat3 - lat1);
-	var bearing1 = (Math.atan2(y, x))*180/Math.PI;
-	bearing1 = 360 - (bearing1 + 360 % 360);
-
-	var y2 = Math.sin(lon2 - lon1) * Math.cos(lat2);
-	var x2 = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lat2 - lat1);
-	var bearing2 = (Math.atan2(y2, x2))*180/Math.PI;
-	bearing2 = 360 - (bearing2 + 360 % 360);
-
-	var lat1Rads = (lat1)*Math.PI/180;
-	var lat3Rads = (lat3)*Math.PI/180;
-	var dLon = (lon3 - lon1)*Math.PI/180;
-
-	var distanceAC = Math.acos(Math.sin(lat1Rads) * Math.sin(lat3Rads)+Math.cos(lat1Rads)*Math.cos(lat3Rads)*Math.cos(dLon)) * 3959;  
-	var min_distance = Math.abs(Math.asin(Math.sin(distanceAC/3959)*Math.sin((bearing1)*Math.PI/180-(bearing2)*Math.PI/180)) * 3959);
-	return min_distance
+	var a = distance(point1,point2);
+	var b = distance(point1,point3);
+	var c = distance(point2,point3);
+	var area = areaTriangle(a,b,c);
+	return area*2/a;
 
 }
 function getNearestGasStation (remainingRange,gasStationArray,carLocation)
