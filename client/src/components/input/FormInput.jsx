@@ -31,7 +31,6 @@ class FormInput extends Component {
                     {this.props.meta.error}
                 </div>}
             </div>
-
         );
     }
 }

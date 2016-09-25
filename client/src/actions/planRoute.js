@@ -9,9 +9,9 @@ import {
 } from "./types";
 import { API_URL } from "../config";
 
-export const planRoute = (origin, destination) => dispatch => {
+export const planRoute = (origin, destination, vin) => dispatch => {
     dispatch({type: START_PROCESSING_ROUTE});
-    fetch(`${API_URL}/gas`,
+    fetch(`${API_URL}/gas/${vin}`,
           {method: "GET"})
         .then(resp => resp.json())
         .then(data => {

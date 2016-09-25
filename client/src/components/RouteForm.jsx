@@ -19,9 +19,9 @@ class RouteForm extends Component {
             method => this[method] = this[method].bind(this));
     }
 
-    _onSubmit({origin, destination}) {
-        console.log(origin, destination);
-        this.props.planRoute(origin, destination);
+    _onSubmit({vin, origin, destination}) {
+        console.log(vin, origin, destination);
+        this.props.planRoute(origin, destination, vin);
     }
 
     _renderAlert() {
@@ -43,6 +43,18 @@ class RouteForm extends Component {
             <div className="ui inverted segment">
                 <form onSubmit={this.props.handleSubmit(this._onSubmit)}
                     className={formClass}>
+                    <div className="field">
+                        <label>Car type</label>
+                        <Field name="vin" component="select">
+                            <option>Select Car Type</option>
+                            <option value="2CNALPEC3B6000001">Chevy Equinox</option>
+                            <option value="1G6DH5E53C000000">Chevy Camaro</option>
+                            <option value="1G1PJ5SC9C700000">GMC Sierra</option>
+                            <option value="1GCRCSE09BZ00000">Chevy Suburban</option>
+                            <option value="1G1ZE5E03CF000006">Chevy Malibu</option>
+                            <option value="1G1JE6SH2C4000007">Chevy Yukon</option>
+                        </Field>
+                    </div>
                     <Field
                         component={FormInput}
                         name="origin"
@@ -83,7 +95,7 @@ const validateForm = values => {
         /-?[0-9]+.[0-9]+,-?[0-9]+.[0-9]+/,
         "Invalid format!",
         "origin", "destination"
-    )(values, required("origin", "destination")(values));
+    )(values, required("vin", "origin", "destination")(values));
     ["origin", "destination"].forEach(
         name =>
             values[name] &&
