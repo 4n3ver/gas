@@ -22,6 +22,28 @@ function distance(p1,p2) {
 	dist = dist * 60 * 1.1515
 	return dist
 }
+function getDistToLine(lat1,lon1,lat2,lon2,lat3,lon3)
+{
+	// getDistToLine(33.781577,-84.413087,33.781479,-84.391557,33.778244,-84.397790)
+	var y = Math.sin(lon3 - lon1) * Math.cos(lat3);
+	var x = Math.cos(lat1) * Math.sin(lat3) - Math.sin(lat1) * Math.cos(lat3) * Math.cos(lat3 - lat1);
+	var bearing1 =(Math.atan2(y, x))*180/Math.PI;
+	bearing1 = 360 - bearing1 ;
+
+	var y2 = Math.sin(lon2 - lon1) * Math.cos(lat2);
+	var x2 = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lat2 - lat1);
+	var bearing2 = (Math.atan2(y2, x2))*180/Math.PI;
+	bearing2 = 360 - bearing2 ;
+
+	var lat1Rads =(lat1)*Math.PI/180;
+	var lat3Rads =(lat3)*Math.PI/180;
+	var dLon =(lon3 - lon1)*Math.PI/180;
+
+	var distanceAC = Math.acos(Math.sin(lat1Rads) * Math.sin(lat3Rads)+Math.cos(lat1Rads)*Math.cos(lat3Rads)*Math.cos(dLon)) * 3959;  
+	var min_distance = Math.abs(Math.asin(Math.sin(distanceAC/6371)*Math.sin((bearing1)*Math.PI/180-(bearing2)*Math.PI/180)) * 3959)
+	return min_distance
+
+}
 function getNearestGasStation (remainingRange,gasStationArray,carLocation)
 {	
 	var tresholdRange = 60;
